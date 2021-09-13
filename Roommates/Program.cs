@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using Roommates.Repositories;
 using Roommates.Models;
+using System.Linq;
 
 namespace Roommates
 {
@@ -64,7 +65,7 @@ namespace Roommates
                         break;
                     case ("Update a room"):
                         List<Room> roomOptions = roomRepo.GetAll();
-                        foreach(Room r in roomOptions)
+                        foreach (Room r in roomOptions)
                         {
                             Console.WriteLine($"{r.Id} - {r.Name} Max Occupancy({r.MaxOccupancy})");
                         }
@@ -85,6 +86,7 @@ namespace Roommates
                         Console.Write("Press any key to continue");
                         Console.ReadKey();
                         break;
+
                     case ("Exit"):
                         runProgram = false;
                         break;
@@ -102,6 +104,7 @@ namespace Roommates
                 "Show all rooms",
                 "Search for room",
                 "Add a room",
+                "Update a room",
                 "Exit"
             };
 
