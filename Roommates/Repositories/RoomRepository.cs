@@ -137,7 +137,9 @@ namespace Roommates.Repositories
                 }
             }
             // OUTPUT INSERTED is saying "I would also like to get back the ID of the room that I just inserted
-            // The cmd.ExecuteScalar method does two things. FIRST: it executes the SQL command against the database. SECOND: It then looks at the first thing that the database sends back (in this case this is jsut the ID it created for the room) and then returns it.
+            // The cmd.ExecuteScalar method does two things.
+            // FIRST: it executes the SQL command against the database.
+            // SECOND: It then looks at the first thing that the database sends back (in this case this is jsut the ID it created for the room) and then returns it.
             //When this method is finished we can look in the database and see the new room.
         }
         public void Update(Room room)
@@ -157,8 +159,25 @@ namespace Roommates.Repositories
 
                     cmd.ExecuteNonQuery();
                     /// <summary>
-                    /// Since this is an UPDATE we use ExecuteNonQuery. What we're telling the database is "I just want you to execute this SQL command and update what it says. I am not expecting a response"
+                    /// Since this is an UPDATE we use ExecuteNonQuery. 
+                    /// What we're telling the database is "I just want you to execute this SQL command and update what it says. I am not expecting a response"
                     /// </summary>
+                }
+            }
+        }
+        /// <summary>
+        /// Delete the room with the given id
+        /// </summary>
+        public void Delete(int id)
+        {
+            using (SqlConnection conn = Connection)
+            {
+                conn.Open();
+                using (SqlCommand cmd = conn.CreateCommand())
+                {
+                    cmd.CommandText = "DELETE FROM Room WHERE Id = @id";
+                    cmd.Parameters.AddWithValue("@id", id);
+                    cmd.ExecuteNonQuery();
                 }
             }
         }
